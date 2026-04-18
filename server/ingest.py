@@ -2,16 +2,18 @@ from http import client
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 import chromadb
 from dotenv import load_dotenv
+from query import _embeddings
+import os
+PERSIST_DIRECTORY = os.getenv("CHROMA_DB_DIR", "./chroma_db")
 
 load_dotenv()
 
 def ingest_pdf(
     pdf_path: str,
-    persist_directory: str = "./chroma_db",
+    persist_directory: str = PERSIST_DIRECTORY,
     collection_name: str = "python_docs",
     chunk_size: int = 350,
     chunk_overlap: int = 50,
@@ -25,7 +27,7 @@ def ingest_pdf(
     )
     chunks = splitter.split_documents(docs)
 
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = _embeddings
     # Clear existing collection before ingesting
     client = chromadb.PersistentClient(path=persist_directory)
     try:

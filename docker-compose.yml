@@ -1,0 +1,22 @@
+services:
+  server:
+    build: ./server
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./server/.env
+    volumes:
+      # This ensures your ChromaDB vector data persists if the container restarts
+      - ./server/chroma_db:/app/chroma_db
+    restart: always
+
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    environment:
+      # Change localhost to your EC2 Public IP if deploying online
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+    depends_on:
+      - server
+    restart: always

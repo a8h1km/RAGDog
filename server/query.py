@@ -4,10 +4,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_chroma import Chroma
 from dotenv import load_dotenv
 import time
+import os
+PERSIST_DIRECTORY = os.getenv("CHROMA_DB_DIR", "./chroma_db")
+
 _embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 load_dotenv()
-
-PERSIST_DIRECTORY = "./chroma_db"
 COLLECTION_NAME = "python_docs"
 
 def _clean_metadata(metadata: dict) -> dict:
