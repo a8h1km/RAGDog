@@ -235,7 +235,7 @@ export default function Home() {
             <Sparkles size={16} />
           </div>
           <div>
-            <p className="text-sm font-bold tracking-tight text-white/95">RAG Observability</p>
+            <p className="text-sm font-bold tracking-tight text-fuchsia-500">RAG Observability</p>
             <p className="text-[11px] text-white/35">Conversational retrieval cockpit</p>
           </div>
           {pdfName ? (
@@ -303,8 +303,8 @@ export default function Home() {
                 <div className={`group max-w-[78%] ${msg.role === "user" ? "order-first" : ""}`}>
                   <div
                     className={`rounded-2xl px-4 py-3 text-sm leading-relaxed border ${msg.role === "user"
-                        ? "bg-violet-600/20 border-violet-500/30 text-white/95 rounded-tr-sm"
-                        : "bg-white/4 border-white/8 text-white/85 rounded-tl-sm"
+                      ? "bg-violet-600/20 border-violet-500/30 text-white/95 rounded-tr-sm"
+                      : "bg-white/4 border-white/8 text-white/85 rounded-tl-sm"
                       }`}
                   >
                     <p className="whitespace-pre-wrap">{msg.content}</p>
